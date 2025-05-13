@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>SMOOTH WORK LAB</title>
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #fdf6e3; /* 에그노그 */
+      font-family: 'Pretendard', sans-serif;
+      color: black;
+    }
+
+    .container {
+      max-width: 600px;
+      min-width: 300px;
+      margin: 80px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .category {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .category h2 {
+      font-size: 20px;
+      margin: 0 0 4px 0;
+    }
+
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .menu-btn {
+      padding: 12px;
+      text-align: center;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      color: black;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* 카테고리별 버튼 배경색 */
+    .playground .menu-btn { background-color: #ffe27f; } /* 놀이터 */
+    .record .menu-btn { background-color: #aef3e7; }     /* 기록 */
+    .etc .menu-btn { background-color: #d2c5f5; }        /* 기타 */
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SMOOTH WORK LAB</h1>
+
+    <div class="category playground">
+      <h2>놀이터</h2>
+      <div class="menu-list">
+        <a href="play1.html" class="menu-btn">메뉴 1</a>
+        <a href="play2.html" class="menu-btn">메뉴 2</a>
+        <a href="play3.html" class="menu-btn">메뉴 3</a>
+      </div>
+    </div>
+
+    <div class="category record">
+      <h2>기록</h2>
+      <div class="menu-list">
+        <a href="log1.html" class="menu-btn">메뉴 1</a>
+        <a href="log2.html" class="menu-btn">메뉴 2</a>
+        <a href="log3.html" class="menu-btn">메뉴 3</a>
+      </div>
+    </div>
+
+    <div class="category etc">
+      <h2>기타</h2>
+      <div class="menu-list">
+        <a href="etc1.html" class="menu-btn">메뉴 1</a>
+        <a href="etc2.html" class="menu-btn">메뉴 2</a>
+        <a href="etc3.html" class="menu-btn">메뉴 3</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
