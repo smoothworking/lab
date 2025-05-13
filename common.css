@@ -6,26 +6,37 @@ body {
   background-color: #fdf6e3; /* 에그노그 */
   font-family: 'Pretendard', sans-serif;
   color: black;
+  padding: 60px 20px 100px; /* 홈버튼과 하단버튼 공간 확보 */
+  position: relative;
 }
 
 .container {
   max-width: 600px;
   min-width: 300px;
-  margin: 40px auto 80px;
-  padding: 0 20px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 30px 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 16px;
 }
 
 .home-link {
+  position: absolute;
+  top: 20px;
+  left: 20px;
   text-decoration: underline;
   font-size: 14px;
-  display: inline-block;
-  margin-bottom: 20px;
   color: black;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 h1 {
   font-size: 24px;
   font-weight: bold;
+  text-align: center;
   margin-top: 0;
 }
 
@@ -34,17 +45,19 @@ h1 {
   line-height: 1.6;
 }
 
+/* 하단 버튼: "나를 위한 일하기" */
 .footer-btn {
-  display: block;
-  width: fit-content;
-  margin: 60px auto 0;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-block;
   padding: 12px 24px;
   background-color: white;
   color: black;
-  border: 2px solid #87ceeb; /* 하늘색 테두리 */
+  border: 2px solid #87ceeb; /* 하늘색 */
   border-radius: 999px;
-  text-align: center;
-  text-decoration: none;
   font-size: 16px;
+  text-decoration: none;
   cursor: pointer;
 }
