@@ -7,60 +7,84 @@
   <style>
     body {
       margin: 0;
-      background-color: #fdf6e3; /* 에그노그 */
+      background-color: #fdf6e3;
       font-family: 'Pretendard', sans-serif;
       color: black;
     }
 
     .container {
-      max-width: 600px;
-      min-width: 300px;
+      max-width: 1000px;
       margin: 80px auto;
       padding: 0 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
     }
 
     h1 {
       font-size: 32px;
       font-weight: bold;
       text-align: center;
+      margin-bottom: 40px;
     }
 
     .category {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      margin-bottom: 60px;
     }
 
     .category h2 {
       font-size: 20px;
-      margin: 0 0 4px 0;
+      margin: 0 0 16px 0;
     }
 
     .menu-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
     }
 
-    .menu-btn {
+    /* 반응형 설정 */
+    @media (max-width: 900px) {
+      .menu-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .menu-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .menu-card {
+      background-color: white;
+      border-radius: 12px;
       padding: 12px;
       text-align: center;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      color: black;
       text-decoration: none;
+      color: black;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
       display: block;
     }
 
-    /* 카테고리별 버튼 배경색 */
-    .playground .menu-btn { background-color: #ffe27f; } /* 놀이터 */
-    .record .menu-btn { background-color: #aef3e7; }     /* 기록 */
-    .etc .menu-btn { background-color: #d2c5f5; }        /* 기타 */
+    .menu-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+
+    .menu-title {
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .playground .menu-card { background-color: #fff9dc; }
+    .record .menu-card { background-color: #dffaf6; }
+    .etc .menu-card { background-color: #f0ecfb; }
   </style>
 </head>
 <body>
@@ -70,27 +94,54 @@
     <div class="category playground">
       <h2>놀이터</h2>
       <div class="menu-list">
-        <a href="emoji_picker.html" class="menu-btn">랜덤 이모지 뽑기</a>
-        <a href="lotto_number.html" class="menu-btn">로또 번호 뽑기</a>
-        <a href="play3.html" class="menu-btn">메뉴 3</a>
+        <a href="emoji_picker.html" class="menu-card">
+          <img src="previews/emoji.jpg" alt="랜덤 이모지 뽑기 미리보기">
+          <div class="menu-title">랜덤 이모지 뽑기</div>
+        </a>
+        <a href="lotto_number.html" class="menu-card">
+          <img src="previews/lotto.jpg" alt="로또 번호 뽑기 미리보기">
+          <div class="menu-title">로또 번호 뽑기</div>
+        </a>
+        <a href="play3.html" class="menu-card">
+          <img src="previews/play3.jpg" alt="메뉴 3 미리보기">
+          <div class="menu-title">메뉴 3</div>
+        </a>
       </div>
     </div>
 
     <div class="category record">
       <h2>기록</h2>
       <div class="menu-list">
-        <a href="log1.html" class="menu-btn">메뉴 1</a>
-        <a href="log2.html" class="menu-btn">메뉴 2</a>
-        <a href="log3.html" class="menu-btn">메뉴 3</a>
+        <a href="log1.html" class="menu-card">
+          <img src="previews/log1.jpg" alt="기록 메뉴 1 미리보기">
+          <div class="menu-title">메뉴 1</div>
+        </a>
+        <a href="log2.html" class="menu-card">
+          <img src="previews/log2.jpg" alt="기록 메뉴 2 미리보기">
+          <div class="menu-title">메뉴 2</div>
+        </a>
+        <a href="log3.html" class="menu-card">
+          <img src="previews/log3.jpg" alt="기록 메뉴 3 미리보기">
+          <div class="menu-title">메뉴 3</div>
+        </a>
       </div>
     </div>
 
     <div class="category etc">
       <h2>기타</h2>
       <div class="menu-list">
-        <a href="etc1.html" class="menu-btn">메뉴 1</a>
-        <a href="etc2.html" class="menu-btn">메뉴 2</a>
-        <a href="etc3.html" class="menu-btn">메뉴 3</a>
+        <a href="etc1.html" class="menu-card">
+          <img src="previews/etc1.jpg" alt="기타 메뉴 1 미리보기">
+          <div class="menu-title">메뉴 1</div>
+        </a>
+        <a href="etc2.html" class="menu-card">
+          <img src="previews/etc2.jpg" alt="기타 메뉴 2 미리보기">
+          <div class="menu-title">메뉴 2</div>
+        </a>
+        <a href="etc3.html" class="menu-card">
+          <img src="previews/etc3.jpg" alt="기타 메뉴 3 미리보기">
+          <div class="menu-title">메뉴 3</div>
+        </a>
       </div>
     </div>
   </div>
