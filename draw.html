@@ -42,56 +42,72 @@
   <button id="resetBtn">리셋</button>
 
   <script>
-    const container = document.getElementById('grid');
-    const resetBtn = document.getElementById('resetBtn');
-    let isMouseDown = false;
-    let isErasing = false;
+  // 변수 선언
+  const container = document.getElementById('grid');
+  const resetBtn = document.getElementById('resetBtn');
+  let isMouseDown = false;
+  let isErasing = false;
 
-    // 셀 생성
-    for (let i = 0; i < 625; i++) {
-      const cell = document.createElement('div');
-      cell.classList.add('cell');
+  // 셀 생성
+  for (let i = 0; i < 625; i++) {
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
 
-      // 클릭 시 색상 또는 지우기
-      cell.addEventListener('mousedown', (e) => {
-        isErasing = e.shiftKey;
-        cell.style.backgroundColor = isErasing ? 'white' : getRandomColor();
-      });
-
-      // 드래그 시 색상 또는 지우기
-      cell.addEventListener('mouseover', () => {
-        if (isMouseDown) {
-          cell.style.backgroundColor = isErasing ? 'white' : getRandomColor();
-        }
-      });
-
-      container.appendChild(cell);
-    }
-
-    // 마우스 상태 감지
-    document.body.addEventListener('mousedown', (e) => {
-      isMouseDown = true;
+    // 마우스 이벤트
+    cell.addEventListener('mousedown', (e) => {
       isErasing = e.shiftKey;
+      paintCell(cell);
+    });
+    cell.addEventListener('mouseover', () => {
+      if (isMouseDown) paintCell(cell);
     });
 
-    document.body.addEventListener('mouseup', () => {
-      isMouseDown = false;
-      isErasing = false;
+    // ✅ 터치 이벤트
+    cell.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      isErasing = false; // 모바일엔 Shift키 없음 (기본은 색칠)
+      paintCell(cell);
     });
 
-    // 리셋 버튼
-    resetBtn.addEventListener('click', () => {
-      const cells = document.querySelectorAll('.cell');
-      cells.forEach(cell => cell.style.backgroundColor = 'white');
+    cell.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const touched = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (touched && touched.classList.contains('cell')) {
+        paintCell(touched);
+      }
     });
 
-    // 랜덤 색상 생성
-    function getRandomColor() {
-      const r = Math.floor(Math.random() * 256);
-      const g = Math.floor(Math.random() * 256);
-      const b = Math.floor(Math.random() * 256);
-      return `rgb(${r}, ${g}, ${b})`;
-    }
-  </script>
+    container.appendChild(cell);
+  }
+
+  // 마우스 상태 감지
+  document.body.addEventListener('mousedown', (e) => {
+    isMouseDown = true;
+    isErasing = e.shiftKey;
+  });
+  document.body.addEventListener('mouseup', () => {
+    isMouseDown = false;
+    isErasing = false;
+  });
+
+  // 리셋
+  resetBtn.addEventListener('click', () => {
+    document.querySelectorAll('.cell').forEach(c => c.style.backgroundColor = 'white');
+  });
+
+  // 색칠 or 지우기
+  function paintCell(cell) {
+    cell.style.backgroundColor = isErasing ? 'white' : getRandomColor();
+  }
+
+  function getRandomColor() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+</script>
+
 </body>
 </html>
