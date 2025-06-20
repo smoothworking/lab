@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>색상 네모</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      justify-content: center;
+      background: #f0f0f0;
+      font-family: sans-serif;
+    }
+
+    .container {
+      width: 400px;
+      height: 400px;
+      display: grid;
+      grid-template-columns: repeat(25, 16px);
+      grid-template-rows: repeat(25, 16px);
+      margin-bottom: 20px;
+    }
+
+    .cell {
+      width: 16px;
+      height:16px;
+      background-color: white;
+    }
+
+    button {
+      padding: 6px 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="grid"></div>
+  <button id="resetBtn">리셋</button>
+
+  <script>
+    const container = document.getElementById('grid');
+    const resetBtn = document.getElementById('resetBtn');
+    let isMouseDown = false;
+    let isErasing = false;
+
+    // 셀 생성
+    for (let i = 0; i < 625; i++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+
+      // 클릭 시 색상 또는 지우기
+      cell.addEventListener('mousedown', (e) => {
+        isErasing = e.shiftKey;
+        cell.style.backgroundColor = isErasing ? 'white' : getRandomColor();
+      });
+
+      // 드래그 시 색상 또는 지우기
+      cell.addEventListener('mouseover', () => {
+        if (isMouseDown) {
+          cell.style.backgroundColor = isErasing ? 'white' : getRandomColor();
+        }
+      });
+
+      container.appendChild(cell);
+    }
+
+    // 마우스 상태 감지
+    document.body.addEventListener('mousedown', (e) => {
+      isMouseDown = true;
+      isErasing = e.shiftKey;
+    });
+
+    document.body.addEventListener('mouseup', () => {
+      isMouseDown = false;
+      isErasing = false;
+    });
+
+    // 리셋 버튼
+    resetBtn.addEventListener('click', () => {
+      const cells = document.querySelectorAll('.cell');
+      cells.forEach(cell => cell.style.backgroundColor = 'white');
+    });
+
+    // 랜덤 색상 생성
+    function getRandomColor() {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+  </script>
+</body>
+</html>

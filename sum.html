@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>랜덤 점 애니메이션</title>
+  <style>
+    body {
+      background-color: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .dot-container {
+      display: flex;
+      gap: 100px;
+    }
+
+    .dot {
+      width: 20px;
+      height: 20px;
+      background-color: gray;
+      border-radius: 50%;
+      transition: transform 0.5s ease, background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    /* 바운스 애니메이션 정의 */
+    @keyframes bounce {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(4); }
+      100% { transform: scale(1); }
+    }
+
+    /* 바운스 클래스 */
+    .bounce {
+      animation: bounce 1.0s ease;
+    }
+  </style>
+</head>
+<body>
+
+<div class="dot-container">
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+</div>
+
+<script>
+  const dots = document.querySelectorAll('.dot');
+
+  // 크기 랜덤 애니메이션
+  function animateDots() {
+    dots.forEach(dot => {
+      const scale = Math.random() * 1 + 0.8; // 0.5~1.5배
+      dot.style.transform = `scale(${scale})`;
+    });
+  }
+
+  // 랜덤 색상 생성
+  function getRandomColor() {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+  }
+
+  // 마우스 오버: 색상 변경
+  dots.forEach(dot => {
+    dot.addEventListener('mouseover', () => {
+      dot.style.backgroundColor = getRandomColor();
+    });
+
+    // 클릭: 바운스 효과
+    dot.addEventListener('click', () => {
+      dot.classList.add('bounce');
+      // 애니메이션이 끝난 후 클래스 제거 (다시 클릭할 수 있게)
+      setTimeout(() => {
+        dot.classList.remove('bounce');
+      }, 600);
+    });
+  });
+
+  setInterval(animateDots, 1000);
+</script>
+
+</body>
+</html>

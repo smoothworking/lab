@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>점 옮기기 (Drag & Drop)</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #f0f0f0;
+    }
+
+    .box {
+      width: 300px;
+      height: 400px;
+      border: 2px dashed #ccc;
+      background-color: rgba(255, 255, 255, 0.5);
+      margin: 20px;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      gap: 5px;
+    }
+
+    .dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #444;
+      cursor: grab;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="leftBox" class="box"></div>
+  <div id="rightBox" class="box"></div>
+
+  <script>
+    // 랜덤 색상 생성 함수
+    function getRandomColor() {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+
+    const leftBox = document.getElementById('leftBox');
+    const rightBox = document.getElementById('rightBox');
+
+    // 드롭 영역 허용
+    [leftBox, rightBox].forEach(box => {
+      box.addEventListener('dragover', (e) => {
+        e.preventDefault(); // 기본 동작 막기 (드롭 가능하게)
+      });
+
+      box.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const dotId = e.dataTransfer.getData('text/plain');
+        const dot = document.getElementById(dotId);
+        if (box === rightBox) {
+          dot.style.backgroundColor = getRandomColor();
+        }
+        box.appendChild(dot);
+      });
+    });
+
+    // 점 30개 생성
+    for (let i = 0; i < 30; i++) {
+      const dot = document.createElement('div');
+      dot.className = 'dot';
+      dot.id = `dot${i}`; // 드래그를 위해 ID 필요
+      dot.draggable = true;
+
+      // 드래그 시작 시 ID 전달
+      dot.addEventListener('dragstart', (e) => {
+        e.dataTransfer.setData('text/plain', dot.id);
+      });
+
+      leftBox.appendChild(dot);
+    }
+  </script>
+
+</body>
+</html>
